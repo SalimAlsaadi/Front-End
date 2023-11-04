@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            margin-top: 15%;
+        }
+
+        .form-container label {
+            font-weight: bold;
+            display: block;
+        }
+
+        .form-container input[type="text"] {
+            width: 93%;
+            padding: 10px;
+            margin: 6px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-container input[type="submit"] {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .card {
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            width: 35%;
+            margin-left: 31%;
+            display: none;
+        }
+
+        .card label {
+            font-weight: bold;
+        }
+
+        .card input {
+            width: 100%;
+            padding: 8px;
+            margin: 4px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .buttons {
+            display: flex;
+        }
+
+        .button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #535151;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+
+        }
+
+        /* Style for the header bar */
+        .header-bar {
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Style for the links (Home and Login) */
+        .header-link {
+            text-decoration: none;
+            color: white;
+            margin: 0 20px;
+            font-size: 40px;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="header-bar">
+        <div class="buttons">
+            <button class="button">
+                <a class="header-link" href="adminServices.html">Admin Control</a>
+            </button>
+        </div>
+
+        <a class="header-link" href="Home.html" style="margin-left: 0%; font-size: 60px;">E-Library</a>
+
+        <div class="buttons">
+
+            <button class="button">
+                <a class="header-link" href="Login.html">Log out</a>
+            </button>
+
+        </div>
+    </div>
+
+    <div class="form-container">
+        <form id="form">
+            <div class="form-group">
+                <label for="BookId">Book Id:</label>
+                <input type="text" id="BookId" name="BookId" required>
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <div class="card" id="cardForm">
+        <form id="form-update">
+            <label for="bookId">Book ID:</label>
+            <input type="text" id="bookId" name="bookId">
+
+            <label for="bookName">Book Name:</label>
+            <input type="text" id="bookName" name="bookName">
+
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author">
+
+            <label for="status">Status:</label>
+            <input type="text" id="status" name="status">
+
+            <label for="publishYear">Publish Year:</label>
+            <input type="text" id="publishYear" name="publishYear">
+
+            <label for="price">Price:</label>
+            <input type="text" id="price" name="price">
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        const bookIdForm = document.getElementById("form");
+        const cardForm = document.getElementById("cardForm");
+        const updateForm = document.getElementById("form-update");
+
+        bookIdForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            cardForm.style.display = "block";
+
+            const bookId = document.getElementById("BookId").value;
+            const requestOptions = {
+                method: 'GET',
+            };
+
+            fetch(`https://localhost:7007/api/book/GetBookByID?bookId=${bookId}`, requestOptions)
+                .then(response => response.json())
+                .then(result => {
+                    document.getElementById("bookId").value = result.bookId;
+                    document.getElementById("bookName").value = result.bookName;
+                    document.getElementById("author").value = result.author;
+                    document.getElementById("status").value = result.available_status;
+                    document.getElementById("publishYear").value = result.pub_year;
+                    document.getElementById("price").value = result.price;
+                })
+                .catch(error => console.log('error', error));
+
+            updateForm.addEventListener("submit", (event) => {
+                event.preventDefault();
+                const updatePut1 = document.getElementById("bookId").value;
+                const updatePut2 = document.getElementById("bookName").value;
+                const updatePut3 = document.getElementById("author").value;
+                const updatePut4 = document.getElementById("status").value;
+                const updatePut5 = document.getElementById("publishYear").value;
+                const updatePut6 = document.getElementById("price").value;
+
+                var requestOptions = {
+                    method: 'PUT',
+                    redirect: 'follow'
+                };
+
+                fetch(`https://localhost:7007/api/book?bookId=${updatePut1}&BookName=${updatePut2}&author=${updatePut3}&pub_year=${updatePut5}&status=${updatePut4}&price=${updatePut6}`, requestOptions)
+                    .then(response => response.text())
+                    .then(result => console.log(result))
+                    .catch(error => console.log('error', error));
+            });
+        });
+    </script>
+</body>
+</html>

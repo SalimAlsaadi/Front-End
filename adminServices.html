@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Library Service</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .div-h1 {
+            width: 100%;
+
+        }
+
+        .div-h1 h1 {
+            width: 60%;
+            background-color: aquamarine;
+            margin-left: 20%;
+            text-align: center;
+            font-size: 55px;
+            background-color: #fff;
+            border: 1px solid #b7b5b5;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card h2 {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .card p {
+            margin: 10px 0;
+        }
+
+        .card a {
+            display: block;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 0;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .card a:hover {
+            background-color: #0056b3;
+        }
+
+         /* Style for the header bar */
+         .header-bar {        
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+           }
+
+        /* Style for the links (Home and Login) */
+        .header-link {
+            text-decoration: none;
+            color: white;
+            margin: 0 20px;
+            font-size: 40px;
+            
+        }
+        
+        .buttons {
+            display: flex;
+        }
+        
+        .button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #535151;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-bar">
+        <a class="header-link" href="Home.html"  style="margin-left: 40%; font-size: 60px;">E-Library</a>
+
+        <div class="buttons">
+        <button class="button">
+            <a class="header-link" href="Login.html" >Log out</a>
+        </button>
+      </div>
+    </div>
+    <div class="container">
+        <div class="div-h1">
+            <h1 class="h1">Welcome to the Library Service</h1>
+        </div>
+        <div class="card">
+            <h2>Add Book</h2>
+            <p>Add a new book to the library's catalog.</p>
+            <a href="addBook.html">Go to Add Book</a>
+        </div>
+        <div class="card">
+            <h2>List Exist Book</h2>
+            <p>All Books Available to borrow from Library.</p>
+            <a href="ListBooksAvailable.html">Go to Add Book</a>
+        </div>
+        <div class="card">
+            <h2>Add Patron</h2>
+            <p>Add a new patron to the library system.</p>
+            <a href="AddPatron.html">Go to Add Patron</a>
+        </div>
+        <div class="card">
+            <h2>Borrow Book</h2>
+            <p>Borrow a book from the library's collection.</p>
+            <a href="Home.html">Go to Borrow Book</a>
+        </div>
+        <div class="card">
+            <h2>Return Book</h2>
+            <p>Return a borrowed book to the library.</p>
+            <a href="return_book.html">Go to Return Book</a>
+        </div>
+        <div class="card">
+            <h2>Delete Book</h2>
+            <p>Delete Book From Library.</p>
+            <a href="deleteBook.html">Go to Delete Book</a>
+        </div>
+
+        <div class="card">
+            <h2>Update Book Details</h2>
+            <p>Update Book Details From Library.</p>
+            <a href="UpdateBook.html">Go to Update Book</a>
+        </div>
+
+        <div class="card">
+            <h2>List Patron with Book borrow</h2>
+            <p>check all patrons with book they borrowed.</p>
+            <a href="return_book.html">Go to Update Book</a>
+        </div>
+
+    </div>
+</body>
+
+
+
+</html>

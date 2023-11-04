@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Book Information Form</title>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f5f8fa;
+        }
+
+        .container {
+            background-color: #8ad2ba;
+            border: 1px solid #e1e8ed;
+            padding: 20px;
+            border-radius: 4px;
+            width: 300px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 100px;
+        }
+
+        .add_book {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            padding: 8px;
+            border: 1px solid #e1e8ed;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+
+        input[type="submit"] {
+            background-color: #1da1f2;
+            color: #ffffff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+            width: 200px;
+            padding-left: 25px;
+            margin-left: 40px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0e71c8;
+        }
+
+        .header-bar {
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-link {
+            text-decoration: none;
+            color: white;
+            margin: 0 20px;
+            font-size: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-bar">
+        <a class="header-link" href="Home.html">E-Library</a>
+        <a class="header-link" href="Login.html">Log out</a>
+    </div>
+
+    <div class="container">
+        <form id="add_book">
+            <h2>Add New Book</h2>
+            <label for="bookName" style="padding-right: 28px;">Book Name:</label>
+            <input type="text" id="bookName" name="bookName" required>
+
+            <label for="author" style="padding-right: 55px;">Author:</label>
+            <input type="text" id="author" name="author" required>
+
+            <label for="publishYear" style="padding-right: 5px;">Publisher Year:</label>
+            <input type="number" id="publishYear" name="publishYear" required>
+
+            <label for="price" style="padding-right: 70px;">Price:</label>
+            <input type="number" id="price" name="price" step="0.01" required>
+            
+            <!-- File input button -->
+            <label for="file">Select a file:</label>
+            <input type="file" id="file" name="file" accept="image/*">
+            
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        const createBookForm = document.getElementById("add_book");
+        createBookForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const bookName = document.getElementById("bookName");
+            const author = document.getElementById("author");
+            const publishYear = document.getElementById("publishYear");
+            const price = document.getElementById("price");
+
+            const fileInput = document.getElementById("file");
+const selectedFile = fileInput.files[0];
+
+
+
+    // Get the full path from the input value
+    const fullPath = fileInput.value;
+
+    // Extract the file name with extension using the lastIndexOf method
+    const fileNameWithExtension = fullPath.substr(fullPath.lastIndexOf('\\') + 1);
+
+    console.log("Selected File Name:", fileNameWithExtension);
+
+
+
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = JSON.stringify({
+                "bookId": 0,
+                "bookName": bookName.value,
+                "author": author.value,
+                "pub_year": publishYear.value,
+                "available_status": "available",
+                "price": price.value,
+                "srcImages": `images/${fileNameWithExtension}`
+            });
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+            };
+
+            fetch("https://localhost:7007/api/book", requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+        });
+    </script>
+</body>
+
+</html>

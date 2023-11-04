@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>User Registration</title>
+    <style>
+        .card {
+            width: 400px;
+            margin: 0 auto;
+            padding: 30px;
+            margin-bottom: 300px;
+            border: 3px solid #afaeae;
+            border-radius: 5px;
+            margin-top: 7%;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .buttons {
+            display: flex;
+        }
+
+        .button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #535151;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+
+        }
+
+        /* Style for the header bar */
+        .header-bar {
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Style for the links (Home and Login) */
+        .header-link {
+            text-decoration: none;
+            color: white;
+            margin: 0 20px;
+            font-size: 40px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-bar">
+        <div class="buttons">
+            <button class="button">
+                <a class="header-link" href="adminServices.html">Admin Control</a>
+            </button>
+        </div>
+
+        <a class="header-link" href="Home.html" style="margin-left: 0%; font-size: 60px;">E-Library</a>
+
+        <div class="buttons">
+
+            <button class="button">
+                <a class="header-link" href="Login.html">Log out</a>
+            </button>
+
+        </div>
+    </div>
+
+    <div class="card">
+        <form>
+            <div class="form-group">
+                <label for="userName">User Name</label>
+                <input type="text" id="userName" name="userName" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber">
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age">
+            </div>
+            <div class="form-group">
+                <label for="bankAccount">Bank Account</label>
+                <input type="text" id="bankAccount" name="bankAccount">
+            </div>
+            <div class="form-group">
+                <label for="userType">User Type</label>
+                <select id="userType" name="userType">
+                    <option value="regular">select user type</option>
+                    <option value="admin">Admin</option>
+                    <option value="User">User</option>
+                </select>
+            </div>
+            <button type="submit" id="submitButton">Create User</button>
+        </form>
+    </div>
+</body>
+
+
+<script>
+
+
+    const submitButton = document.getElementById("submitButton");
+    submitButton.addEventListener("click", (event) => {
+localStorage.setItem("done", "go ahead");
+        event.preventDefault(); // Prevent the default form submission behavior
+
+        const userName = document.getElementById("userName").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const phoneNumber = document.getElementById("phoneNumber").value;
+        const age = document.getElementById("age").value;
+        const bankAccount = document.getElementById("bankAccount").value;
+        const userType = document.getElementById("userType").value;
+
+
+
+        var requestOptions = {
+            method: 'POST',
+            redirect: 'follow'
+        };
+
+        fetch(`https://localhost:7007/api/Users?userName=${userName}&Email=${email}&Password=${password}&phoneNumber=${phoneNumber}&age=${age}&bank_account=${bankAccount}&user_type=${userType}`, requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+    });
+
+
+</script>
+
+
+</html>

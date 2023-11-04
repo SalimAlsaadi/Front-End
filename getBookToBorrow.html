@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <style>
+        /* Style for the header */
+        .header {
+            width: 100%;
+
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+
+        /* Style for the search item */
+        .search {
+            flex-grow: 1;
+            text-align: center;
+            max-height: 20%
+        }
+
+        /* Style for buttons */
+        .buttons {
+            display: flex;
+        }
+
+        /* Style for each button */
+        .button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #555;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+
+        }
+
+        /* Style for the card container */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 80%;
+            margin: 5% 10%;
+            align-items: center;
+            /* Center vertically */
+            text-align: center;
+            /* Center horizontally */
+            min-height: 400px;
+            /* Set a minimum height for vertical centering */
+            border: 2px solid #ccc;
+
+        }
+
+
+
+        /* Style for the card */
+        .card {
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 0;
+
+            text-align: center;
+            /* Center horizontally */
+            width: calc(27% - 20px);
+            /* 25% width for 4 cards in a row with 20px margin */
+            height: 400px;
+            box-shadow: 0 2px 4px rgba(94, 22, 22, 0.1);
+            background-size: 100%;
+            margin: auto;
+            margin: 10px;
+            position: relative;
+            overflow: hidden;
+            /* Hide overflowing content */
+            transition: transform 0.3s;
+            margin-left: 1%;
+            width: calc(25% - 10px);
+        }
+
+        /* Define a hover effect for the card */
+        .card:hover {
+            transform: scale(1.1);
+            /* Increase the size on hover */
+            cursor: pointer;
+            /* Change cursor to indicate interaction */
+            z-index: 3;
+            /* Adjust the z-index to bring the hovered card to the front */
+        }
+
+        /* Style for the cardBar */
+        .cardBar {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            max-height: 15%;
+            font-size: 25px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s;
+            /* Add transition for smooth effect */
+        }
+
+        /* Style for the cardBar content */
+        .cardBar p {
+            margin: 1px 0;
+            font-size: 15px;
+        }
+
+        .cardText {
+            margin: 1px 0;
+            font-size: 15px;
+        }
+
+        .borrowText {
+            margin: 1px 0;
+            font-size: 20px;
+            display: none;
+        }
+
+        .titleDiv {
+            background-color: #fff;
+            color: black;
+            text-align: center;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+
+        .cardDetails {
+
+            width: calc(47% - 20px);
+            margin-right: 290px;
+        }
+
+        .cardForBorrow {
+            border: 2px solid #a7a7a7;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            margin-left: 10%;
+            width: 80%;
+            margin-bottom: 150px;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .doneForm {
+            width: 50%;
+            margin-left: 18%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="header" id="header">
+        <div class="homeLink" id="homeLink">
+            <a href="Home.html"
+                style="text-align: left; padding-left: 15px; color: #fff; font-size: 20px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Library</a>
+        </div>
+        <div class="search" id="search">
+            <input type="text" placeholder="Search" style="width: 250px; height: 30px;">
+        </div>
+        <div class="buttons">
+            <button class="button" id="log-out" value="log out">
+                <p id="p-login">Log out</p>
+            </button>
+        </div>
+    </div>
+    <div id="card-list" class="card-container">
+        <div id="card" class="card">
+            <div class="cardBar" id="cardBar">
+                <p class="cardText" id="cardText"></p>
+                <p class="cardText" id="cardText"></p>
+                <p class="cardText" id="cardText"></p>
+                <p class="borrowText">BORROW NOW</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="doneForm" class="doneForm" style="display: none;">
+        <img src="images/done.gif">
+    </div>
+
+
+    <div class="cardForBorrow" id="formBorrow" style="display: none;">
+        <h1 style="text-align: center;">Form For Borrow</h1>
+        <div class="form-group">
+            <label for="patronId">Patron ID</label>
+            <input type="text" id="patronId" name="patronId">
+        </div>
+        <div class="form-group">
+            <label for="bookId">Book ID</label>
+            <input type="text" id="bookId" name="bookId">
+        </div>
+        <div class="form-group">
+            <label for="bankCustId">Bank Cust ID</label>
+            <input type="text" id="bankCustId111" name="bankCustId">
+        </div>
+        <div class="form-group">
+            <label for="account">Account</label>
+            <input type="text" id="account" name="account">
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" id="price" name="price">
+        </div>
+        <button id="borrowNow"
+            style="width: 15%; background-color: #333; color: #f7f3f3; height: 30px; font-size: 20px;">Borrow</button>
+    </div>
+</body>
+
+
+<script>//script to get book bata
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+    };
+
+    fetch(`https://localhost:7007/api/book/GetBookByID?bookId=${localStorage.bookId}`, requestOptions)
+        .then(response => response.json())
+        .then(book => {
+
+            const cardDetails = document.createElement("div");
+            cardDetails.classList.add("cardDetails");
+            cardDetails.setAttribute('id', 'cardDetails');
+            const text = document.createElement("p");
+            text.textContent = `Overall, the Book of ${book.bookName} is created by ${book.author}, published in ${book.pub_year}. This book is full of valuable information, most people borrowed this book and they came back again to borrow same book `;
+            cardDetails.appendChild(text);
+
+
+
+
+            //cardBar.innerHTML = `<p>Author: ${book.author}</p><p>publish year: ${book.pub_year}</p><p>Price By R.O: ${book.price}`;
+            const cardText = document.getElementById("cardText");
+            cardText.innerHTML = `<p>Author: ${book.author}</p><p>publish year: ${book.pub_year}</p><p>Price By R.O: ${book.price}`;
+
+            //console.log(book)
+            const titleDiv = document.createElement('div');
+            titleDiv.classList.add('titleDiv');
+            titleDiv.setAttribute('id', 'titleDiv');
+            titleDiv.innerHTML = `<h1>${book.bookName}</h1>`;
+            card.appendChild(titleDiv);
+            card.appendChild(cardBar);
+            card.style.backgroundImage = `url(${book.srcImages})`;
+            const cardList = document.getElementById("card-list");
+            cardList.appendChild(card);
+            cardList.appendChild(cardDetails);
+        })
+        .catch(error => console.log('error', error));
+</script>
+
+
+<script>//script if user click log out
+    console.log(localStorage);
+    const logOut = document.getElementById('log-out');
+    logOut.addEventListener('click', (event) => {
+        window.location.href = "Home.html";
+        localStorage.clear();
+    });
+</script>
+
+<script>//script for when mouse hovering over the card to change details to borrow now 
+
+
+    // Add an event listener to each card for hover effect
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+        const cardBar = card.querySelector('.cardBar');
+        const borrowText = card.querySelector('.borrowText');
+
+        card.addEventListener('mouseenter', () => {
+            cardBar.style.backgroundColor = 'blue'; // Change background color on hover
+            borrowText.style.display = 'block'; // Show "BORROW NOW" text
+            const cardText = document.getElementById("cardText");
+            cardText.style.display = 'none';
+            cards.appendChild(borrowText);
+
+        });
+
+        card.addEventListener('mouseleave', () => {
+            cardBar.style.backgroundColor = '#333'; // Change background color on hover out
+            borrowText.style.display = 'none'; // Hide "BORROW NOW" text
+            const cardText = document.getElementById("cardText");
+            cardText.style.display = 'block';
+        });
+    });
+</script>
+
+
+<script>//script to complete process borrow 
+    const cardBorrowBook = document.getElementById("card-list");
+    cardBorrowBook.addEventListener('click', (event) => {
+        const formBorrow = document.getElementById("formBorrow");
+        formBorrow.style.display = "block";
+        document.getElementById("bookId").value = localStorage.getItem("bookId");
+        document.getElementById("patronId").value = localStorage.getItem("userId");
+        document.getElementById("account").value = localStorage.getItem("bank_account");
+        document.getElementById("price").value = localStorage.getItem("BookPrice");
+
+
+        const borrowNow = document.getElementById("borrowNow");
+        borrowNow.addEventListener('click', (event) => {
+
+            const bookId = document.getElementById("bookId").value;
+            const UserId = document.getElementById("UserId").value;
+            const account = document.getElementById("account").value;
+            const price = document.getElementById("price").value;
+            const BankCustID = document.getElementById("bankCustId111").value;
+
+            var requestOptions = {
+                method: 'POST',
+                redirect: 'follow'
+            };
+
+
+            fetch(`https://localhost:7007/api/Borrow?patronId=${patronId}&bookId=${bookId}&BankCustID=${BankCustID}&Acc=${account}&price=1`, requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+
+
+            const cardlist = document.getElementById("card-list");
+            cardlist.style.display = "none";
+
+            const formBorrow = document.getElementById("formBorrow");
+            formBorrow.style.display = "none";
+
+
+            const doneForm = document.getElementById("doneForm");
+            doneForm.style.display = "block";
+            setTimeout(function () {
+                window.location.href="Home.html";
+            }, 3000);
+
+
+
+
+        });
+
+
+    }); 
+</script>
+
+</html>
